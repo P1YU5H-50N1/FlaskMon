@@ -30,4 +30,4 @@ def check():
 
 if __name__ == '__main__':
     #app.run(debug=True)
-    run("gunicorn -w 2 -b 0.0.0.0:80 'server:app'".split(' '))
+    run("pipenv run gunicorn -w 2 -b 0.0.0.0:80 'server:app'".split(' '))
