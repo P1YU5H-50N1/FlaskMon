@@ -1,6 +1,7 @@
 from flask import Flask, request
 from pymongo import MongoClient
 import os
+from celery import Celery
 from subprocess import run
 
 
