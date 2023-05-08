@@ -15,7 +15,7 @@ client = MongoClient(db_uri)
 db = client['mydatabase']
 collection = db['mycollection']
 
-@celery.task
+@Celery.task
 def insert_into_mongodb(data):
     collection.insert_many(data)
 
