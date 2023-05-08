@@ -1,6 +1,8 @@
 from flask import Flask, request
 from pymongo import MongoClient
 import os
+from gunicorn.app.wsgiapp import WSGIApplication
+
 
 app = Flask(__name__)
 
@@ -23,4 +25,10 @@ def save_data():
     return 'Data saved successfully'
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
+    options = {
+        'bind': '0.0.0.0:80',
+        'workers': 2
+    }
+    
+    WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]").run()
