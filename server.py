@@ -14,13 +14,17 @@ client = MongoClient(db_uri)
 db = client['mydatabase']
 collection = db['mycollection']
 
+@celery.task
+def insert_into_mongodb(data):
+    collection.insert_many(data)
+
 @app.route('/api/save-data', methods=['POST'])
 def save_data():
     # Get the data from the request
     data = request.json
-
+    insert_into_mongodb.delay(data)
     # Save the data to the database
-    collection.insert_many(data)
+    #collection.insert_many(data)
 
     return 'Data saved successfully'
 
